@@ -1,10 +1,12 @@
 ﻿using MenagerZadan.Models;
 using MenagerZadan.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MenagerZadan.Controllers
 {
+    [Authorize]
     public class TaskController : Controller
     {
 

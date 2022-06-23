@@ -18,7 +18,7 @@ namespace TaskManager
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -27,6 +27,7 @@ namespace TaskManager
         public void ConfigureServices(IServiceCollection services)
         {
              services.AddControllersWithViews();
+             services.AddRazorPages();
              services.AddDbContext<TaskManagerContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("TaskManagerDatabase")));
 
@@ -52,6 +53,7 @@ namespace TaskManager
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -59,6 +61,7 @@ namespace TaskManager
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Task}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
